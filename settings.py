@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 # Дефолтные настройки
 BASE_DIR = Path(__file__).parent
 

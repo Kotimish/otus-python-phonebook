@@ -30,6 +30,7 @@ def is_phone_number(number: str) -> bool:
         return False
     return True
 
+
 def is_valid_new_file_path(path_str: str) -> bool:
     """
     Проверка пути к новому файлу на валидность
@@ -59,6 +60,7 @@ def is_valid_new_file_path(path_str: str) -> bool:
         return True
     return False
 
+
 def is_valid_file_path(path_str: str) -> bool:
     """
     Проверка пути к файлу на валидность
@@ -73,6 +75,7 @@ def is_valid_file_path(path_str: str) -> bool:
         path.exists() and
         path.is_file()
     )
+
 
 def is_valid_phonebook(phonebook: list) -> bool:
     pass

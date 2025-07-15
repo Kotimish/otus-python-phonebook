@@ -1,6 +1,7 @@
 from core import actions
 from ui import render, user_input
 
+
 def missing_menu(context: dict) -> str:
     """Базовое меню для информирования о недоступности запрошенного меню"""
     menu_name = 'Ошибка'

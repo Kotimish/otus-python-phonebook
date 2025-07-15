@@ -10,6 +10,7 @@ def load_json(file_path: str) -> dict:
 
     return result
 
+
 def save_json(file_path: str, data: dict):
     """
     Сохранение json-файла

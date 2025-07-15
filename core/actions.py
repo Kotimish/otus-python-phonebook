@@ -22,6 +22,7 @@ def open_phonebook(context: dict) -> str:
     context['max_id'] = utils.get_max_id(data['phonebook'])
     return 'main_menu'
 
+
 def change_phonebook(context):
     """
     Изменение пути к файлу телефонного справочника
@@ -46,6 +47,7 @@ def change_phonebook(context):
     context['file'] = file_path
     return 'welcome_menu'
 
+
 def change_contact_name(context: dict) -> str:
     """
     Изменение названия контакта
@@ -56,6 +58,7 @@ def change_contact_name(context: dict) -> str:
     context['current_contact']['name'] = name
     context['is_modified'] = True
     return restart_menu(context)
+
 
 def change_contact_phone(context: dict) -> str:
     """
@@ -82,6 +85,7 @@ def change_contact_phone(context: dict) -> str:
     context['is_modified'] = True
     return restart_menu(context)
 
+
 def change_contact_comment(context: dict) -> str:
     """
     Изменение комментария к контакту
@@ -92,6 +96,7 @@ def change_contact_comment(context: dict) -> str:
     context['current_contact']['comment'] = comment
     context['is_modified'] = True
     return restart_menu(context)
+
 
 def show_all_contacts(context: dict) -> str:
     """
@@ -118,6 +123,7 @@ def show_all_contacts(context: dict) -> str:
 
     return 'contacts_menu'
 
+
 def show_contact(contact: dict) -> str:
     """
     Шаблон для отображения контакта
@@ -140,6 +146,7 @@ def show_contact(contact: dict) -> str:
     ):
         text += f', Коммент: {contact["comment"]};'
     return text
+
 
 def create_contact(context: dict) -> str:
     """
@@ -202,6 +209,7 @@ def create_contact(context: dict) -> str:
     input('Нажмите Enter чтобы продолжить...')
     return 'contact_menu'
 
+
 def get_contact_by_id(context: dict) -> str:
     """
     Поиск/получение контакта по его id.
@@ -233,6 +241,7 @@ def get_contact_by_id(context: dict) -> str:
     context['current_contact'] = contact
     return 'contact_menu'
 
+
 def search_contact_by_id(contacts, contact_id):
     """
     Поиск/получение контакта по его id.
@@ -245,6 +254,7 @@ def search_contact_by_id(contacts, contact_id):
         if contact_id == contact.get('id'):
             return contact
     return None
+
 
 def get_contact_by_name(context: dict) -> str:
     """
@@ -265,6 +275,7 @@ def get_contact_by_name(context: dict) -> str:
         print('Ошибка. Контакт не найден.')
         input('Нажмите Enter чтобы продолжить...')
         return restart_menu(context)
+
 
 def get_contact_by_number(context: dict) -> str:
     """
@@ -296,6 +307,7 @@ def get_contact_by_number(context: dict) -> str:
         input('Нажмите Enter чтобы продолжить...')
         return restart_menu(context)
 
+
 def search_contact_by_field(contacts, field, value):
     """
     Поиск/получение контакта по его id.
@@ -310,6 +322,7 @@ def search_contact_by_field(contacts, field, value):
         if contact.get(field) == value:
             found_contacts.append(contact)
     return found_contacts
+
 
 def delete_contact(context: dict) -> str:
     """
@@ -338,6 +351,7 @@ def delete_contact(context: dict) -> str:
     context['phonebook'].pop(position)
     return go_back_menu(context)
 
+
 def save_phonebook(context: dict) -> str:
     """
     Сохранение изменений телефонного справочника.
@@ -355,6 +369,7 @@ def save_phonebook(context: dict) -> str:
     context['is_modified'] = False
     return restart_menu(context)
 
+
 def save_phonebook_in_another_file(context: dict) -> str:
     """
     Сохранение изменений телефонного справочника в другой файл.
@@ -365,6 +380,7 @@ def save_phonebook_in_another_file(context: dict) -> str:
     change_phonebook(context)
     save_phonebook(context)
     return restart_menu(context)
+
 
 def close_phonebook(context: dict) -> str:
     """
@@ -379,6 +395,7 @@ def close_phonebook(context: dict) -> str:
         save_phonebook(context)
     return 'welcome_menu'
 
+
 def close_app(context: dict) -> str:
     """
     Возврат сигнала на завершение работы с программой
@@ -387,6 +404,7 @@ def close_app(context: dict) -> str:
     """
     return 'exit'
 
+
 def go_back_menu(context: dict) -> str:
     """
     Возвращает специальный флаг возврата в предыдущее меню
@@ -394,6 +412,7 @@ def go_back_menu(context: dict) -> str:
     :return: Статус предыдущего меню
     """
     return 'back_menu'
+
 
 def restart_menu(context: dict) -> str:
     """

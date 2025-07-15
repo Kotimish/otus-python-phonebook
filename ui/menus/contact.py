@@ -23,6 +23,7 @@ def change_contact_menu(context: dict) -> str:
         return actions.restart_menu(context)
     return user_choice(context)
 
+
 def contact_menu(context: dict) -> str:
     """Меню показа контакта"""
     menu_name = 'Контакт'
@@ -44,6 +45,7 @@ def contact_menu(context: dict) -> str:
     if user_choice is None:
         return actions.restart_menu(context)
     return user_choice(context)
+
 
 def contacts_menu(context: dict) -> str:
     """Меню работы с выбранными контактами"""

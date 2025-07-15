@@ -10,6 +10,7 @@ def clear_terminal():
     else:
         print('Ошибка при очистке экрана, неопределенный тип операционной системы')
 
+
 def render_interface(label: str = 'Меню', extra_info: str=None):
     """Отрисовка интерфейса меню"""
     clear_terminal()
@@ -19,6 +20,7 @@ def render_interface(label: str = 'Меню', extra_info: str=None):
         print('=' * (8 + len(label)))
         print(extra_info)
     print('=' * (8 + len(label)))
+
 
 def render_choice_interface(menu_options: dict):
     """Отрисовка меню с выбором"""

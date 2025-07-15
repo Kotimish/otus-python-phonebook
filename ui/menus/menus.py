@@ -28,6 +28,7 @@ def welcome_menu(context: dict) -> str:
         return actions.restart_menu(context)
     return user_choice(context)
 
+
 def main_menu(context: dict) -> str:
     """Основное меню"""
 

@@ -11,6 +11,7 @@ def create_router():
         'missing_menu': missing_menu
     }
 
+
     def register_state(function, state_name: str):
         """
         Ручная регистрация состояний в обработчике
@@ -23,11 +24,13 @@ def create_router():
             states[state_name] = function
             print(f'Статус {state_name} успешно зарегистрирован')
 
+
     def get_state(state_name: str):
         """Получение ссылки на зарегистрированную функцию через состояние"""
         return states.get(state_name, missing_menu)
 
     return register_state, get_state
+
 
 def init():
     """Явная регистрация интерфейсов меню"""

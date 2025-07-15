@@ -20,9 +20,11 @@ def create_context():
         'max_id': -1,
     }
 
+
 def init_menu():
     """Центральная функция инициации вспомогательных элементов"""
     states.init()
+
 
 def state_handler(default_menu: str):
     """
@@ -49,6 +51,7 @@ def state_handler(default_menu: str):
             current_state = next_state
 
     input('Нажмите Enter для завершения работы...')
+
 
 if __name__=='__main__':
     init_menu()

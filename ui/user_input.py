@@ -1,6 +1,7 @@
 from settings import MAX_USER_INPUT_ATTEMPTS
 from ui import render
 
+
 def ask_yes_no(question: str, default: str = "yes"):
     """
     Создание и получения ответа пользователя на закрытый вопрос
@@ -13,7 +14,8 @@ def ask_yes_no(question: str, default: str = "yes"):
         "да": True, "д": True, "нет": False, "н": False,
     }
     error_message = ''
-    while True:
+    attempt_count = 0
+    while attempt_count < MAX_USER_INPUT_ATTEMPTS:
         render.clear_terminal()
         if error_message:
             print(error_message)
@@ -23,6 +25,10 @@ def ask_yes_no(question: str, default: str = "yes"):
         if user_input in valid_input:
             return valid_input[user_input]
         error_message = "Ошибка: введите 'y' или 'n'"
+        attempt_count += 1
+    print(f'Превышено число попыток ввода. Будет использовано дефолтное значение: {default}')
+    input('Нажмите Enter чтобы продолжить...')
+    return None
 
 
 def get_user_menu_choice(menu_options: dict):
