@@ -28,4 +28,4 @@ def ask_yes_no(question: str, default: str = "yes"):
         attempt_count += 1
     view.show_message(text.maximum_number_attempts_error.format(default=default))
     view.input_date(text.press_any_key)
-    return None
+    return valid_input[default]
