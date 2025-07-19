@@ -38,6 +38,7 @@ incorrect_input_close_answer_error = 'Ошибка: введите \'y\' или 
 phonebook_load_successful = 'Телефонная книга успешно загружена.'
 phonebook_save_successful = 'Телефонная книга успешно сохранена.'
 empty_phonebook_error = 'Телефонная книга пуста или не открыта.'
+exist_phonebook_error = 'В текущей телефонной книге уже есть записи. Открыть новую телефонную книгу?'
 
 # --- Сообщения контакта ---
 show_contact = 'ID: {idx}, {contact}'

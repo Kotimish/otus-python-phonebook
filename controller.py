@@ -12,6 +12,11 @@ class MainController:
         self.is_running = True
 
     def open_phonebook(self):
+        if (
+                len(self.phonebook.contacts) > 0 and
+                not utils.ask_yes_no(text.exist_phonebook_error, default='no')
+        ):
+            return
         try:
             self.phonebook.load_json()
         except FileNotFoundError as e:
