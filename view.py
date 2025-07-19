@@ -66,6 +66,7 @@ def input_date(message: str|list[str]) -> str|list[str]:
             result.append(input(msg))
         except UnicodeDecodeError:
             show_message(text.decode_error)
+            result.append('')
     return result if len(result) > 1 else result[0]
 
 
