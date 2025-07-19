@@ -11,6 +11,7 @@ def get_max_id(contacts):
         print('Ошибка. Получен некорректный список контактов')
         return max_id
 
+
     for contact in contacts:
         if (
             'id' not in contact
