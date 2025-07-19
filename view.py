@@ -48,7 +48,7 @@ def get_user_menu_choice(menu_options: list):
                 0 < int(user_choice) <= len(menu_options)
         ):
             return int(user_choice)
-        print(text.user_menu_choice_error.format(menu_options=menu_options))
+        print(text.user_menu_choice_error.format(menu_options=len(menu_options)))
 
 
 def input_date(message: str|list[str]) -> str|list[str]:

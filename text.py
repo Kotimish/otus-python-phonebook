@@ -5,7 +5,7 @@
 Примечание:
 Не добавлять сюда логику формирования сообщений — только статичные тексты.
 """
-
+# --- Сообщения меню ---
 main_menu_items = {
     'title': 'Главное меню',
     'items': [
@@ -19,26 +19,31 @@ main_menu_items = {
         'Выход',
     ]
 }
-
-error = 'Ошибка.'
-decode_error = 'Ошибка кодировки. Пожалуйста, введите текст корректно'
-
 user_menu_choice = 'Выберите пункт меню: '
 user_menu_choice_error = 'Недопустимое значение. Нужно ввести целое число от 1 до {menu_options}.'
+maximum_number_attempts_error = 'Превышено число попыток ввода. Будет использовано дефолтное значение: {default}'
 
+# --- Сообщения об ошибках ---
+error = 'Ошибка: {error}'
+decode_error = 'Ошибка кодировки. Пожалуйста, введите текст корректно'
+incorrect_phone_error = 'Некорректный формат номера телефона \'{phone}\'.'
+incorrect_contact_id_error = 'Некорректный формат номера телефона \'{idx}\'.'
+not_found_file_error = 'Файл не найден: {file_path}.'
+not_found_contact_error = 'Контакт с ID \'{idx}\' не найден.'
+incorrect_json_file_error = 'Некорректный формат JSON в файле: {file_path}'
+incorrect_input_close_answer_error = 'Ошибка: введите \'y\' или \'n\''
+
+
+# --- Сообщения телефонной книги ---
 phonebook_load_successful = 'Телефонная книга успешно загружена.'
 phonebook_save_successful = 'Телефонная книга успешно сохранена.'
 empty_phonebook_error = 'Телефонная книга пуста или не открыта.'
 
-empty_menu_options = 'Список опций меню пуст.'
-
+# --- Сообщения контакта ---
 show_contact = 'ID: {idx}, {contact}'
 contact_created_successful = 'Контакт {name} успешно создан.'
 contact_edited_successful = 'Контакт {name} успешно изменен.'
 contact_deleted_successful = 'Контакт {name} успешно удален.'
-
-end_of_program = 'Завершение работы.'
-press_any_key = 'Нажмите Enter чтобы продолжить...'
 
 input_find_word = 'Введите искомое слово: '
 no_found_contact = 'Контакты, содержащие {word}, не найдены'
@@ -61,3 +66,10 @@ input_contact_data_to_edit = [
     'Введите новый номер телефона (или оставьте без изменений): ',
     'Введите новый комментарий (или оставьте без изменений): ',
 ]
+
+confirm_delete_contact = 'Вы действительно хотите удалить контакт?'
+
+# --- Другие сообщения ---
+end_of_program = 'Завершение работы.'
+press_any_key = 'Нажмите Enter чтобы продолжить...'
+cancel_operation = 'Отмена операции'

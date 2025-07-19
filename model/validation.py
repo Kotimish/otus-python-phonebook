@@ -14,18 +14,18 @@ def is_phone_number(number: str) -> bool:
     # Список разрешенных спец-символов в телефонном номере
     # Скобки, пробельные символы, дефисы и тире
     pattern = r'[\(\)\s\u002D\u2010\u2011\u2012\u2013\u2014\u2212]+'
+    # Отсутствует номер
     if not number:
-        print('Ошибка. Отсутствует номер')
         return False
+    # Пропущен указатель на международный код страны
     if len(number) > 0 and number[0] != '+':
-        print('Ошибка. Пропущен указатель на международный код страны')
         return False
     number = number[1:]
     number = re.sub(pattern, '', number)
+    # В номере присутствуют недопустимые символы
     if not number.isdigit():
-        print('Ошибка. В номере присутствуют недопустимые символы')
         return False
+    # Некорректная длина телефонного номера
     if not (7 < len(number) < 15):
-        print('Ошибка. Некорректная длина телефонного номера')
         return False
     return True

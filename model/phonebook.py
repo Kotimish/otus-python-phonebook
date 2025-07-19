@@ -1,4 +1,6 @@
 import json
+
+from error import InvalidContactIDError, ContactNotFoundError
 from model.contact import Contact
 from model.file_handler import FileHandler
 
@@ -29,6 +31,10 @@ class PhoneBook:
         :param contact_id: ID искомого контакта
         :return: Контакт
         """
+        if not isinstance(contact_id, int) or contact_id <= 0:
+            raise InvalidContactIDError(contact_id)
+        if contact_id not in self.contacts:
+            raise ContactNotFoundError(contact_id)
         return self.contacts.get(contact_id)
 
     def _next_id(self) -> int:
@@ -72,6 +78,10 @@ class PhoneBook:
         :param contact_id: ID удаляемого контакта
         :return: Словарь с данными об удаленном контакте
         """
+        if not isinstance(contact_id, int) or contact_id <= 0:
+            raise InvalidContactIDError(contact_id)
+        if contact_id not in self.contacts:
+            raise ContactNotFoundError(contact_id)
         contact = self.contacts.pop(contact_id)
         return contact
 
