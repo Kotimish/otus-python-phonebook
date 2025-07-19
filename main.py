@@ -1,14 +1,16 @@
-import states
-import controller
-from handler import state_handler
+import locale
+import sys
 
-def init_menu():
-    """Центральная функция инициации вспомогательных элементов"""
-    states.init()
+import settings
+from controller import MainController
 
 
 if __name__=='__main__':
-    # deprecated logic
-    # init_menu()
-    # state_handler('welcome_menu')
+    print("Кодировка stdin:", sys.stdin.encoding)
+    print("Кодировка stdout:", sys.stdout.encoding)
+    print("Кодировка stderr:", sys.stderr.encoding)
+
+    print("Локаль системы:", locale.getpreferredencoding())
+
+    controller = MainController(settings.DEFAULT_CONTACTS_FILE_PATH)
     controller.run()

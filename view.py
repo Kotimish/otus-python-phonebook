@@ -1,6 +1,6 @@
 import os
 import text
-import view
+from model.contact import Contact
 
 
 def show_message(message: str):
@@ -22,7 +22,7 @@ def show_menu(title: str, options: list):
         print(f'\t{number + 1}. {item}')
 
 
-def show_contacts(phonebook: dict[int, dict], error_message: str):
+def show_contacts(phonebook: dict[int, Contact], error_message: str):
     """
     Отображает переданные контакты
     :param phonebook: Список контактов для показа в виде словаря
@@ -32,17 +32,7 @@ def show_contacts(phonebook: dict[int, dict], error_message: str):
         show_message(error_message)
         return
     for idx, contact in phonebook.items():
-        text = (
-            f'ID: {idx}, '
-            f'Имя: {contact["name"]}, '
-            f'Телефон: {contact["phone"]}'
-        )
-        if (
-            'comment' in contact and
-            contact['comment']
-        ):
-            text += f', Коммент: {contact["comment"]};'
-        view.show_message(text)
+        show_message(text.show_contact.format(idx=idx, contact=str(contact)))
 
 
 def get_user_menu_choice(menu_options: list):
@@ -52,7 +42,7 @@ def get_user_menu_choice(menu_options: list):
     :return: возвращает соответствующее действие для выбранного пункта меню
     """
     while True:
-        user_choice = input(text.user_menu_choice).strip()
+        user_choice = input_date(text.user_menu_choice).strip()
         if (
                 user_choice.isdigit() and
                 0 < int(user_choice) <= len(menu_options)
@@ -71,7 +61,11 @@ def input_date(message: str|list[str]) -> str|list[str]:
         message = [message]
     result = []
     for msg in message:
-        result.append(input(msg))
+        # todo продумать корректный ввод при ошибки
+        try:
+            result.append(input(msg))
+        except UnicodeDecodeError:
+            show_message(text.decode_error)
     return result if len(result) > 1 else result[0]
 
 

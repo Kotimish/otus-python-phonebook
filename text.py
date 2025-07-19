@@ -21,6 +21,7 @@ main_menu_items = {
 }
 
 error = 'Ошибка.'
+decode_error = 'Ошибка кодировки. Пожалуйста, введите текст корректно'
 
 user_menu_choice = 'Выберите пункт меню: '
 user_menu_choice_error = 'Недопустимое значение. Нужно ввести целое число от 1 до {menu_options}.'
@@ -29,6 +30,9 @@ phonebook_load_successful = 'Телефонная книга успешно за
 phonebook_save_successful = 'Телефонная книга успешно сохранена.'
 empty_phonebook_error = 'Телефонная книга пуста или не открыта.'
 
+empty_menu_options = 'Список опций меню пуст.'
+
+show_contact = 'ID: {idx}, {contact}'
 contact_created_successful = 'Контакт {name} успешно создан.'
 contact_edited_successful = 'Контакт {name} успешно изменен.'
 contact_deleted_successful = 'Контакт {name} успешно удален.'
