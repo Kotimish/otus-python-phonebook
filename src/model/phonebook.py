@@ -1,8 +1,6 @@
-import json
-
-from error import InvalidContactIDError, ContactNotFoundError
-from model.contact import Contact
-from model.file_handler import FileHandler
+from src.exceptions.phonebook import InvalidContactIDError, ContactNotFoundError
+from src.model.contact import Contact
+from src.model.file_handler import FileHandler
 
 
 class PhoneBook:

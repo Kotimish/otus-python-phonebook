@@ -1,5 +1,5 @@
-from error import InvalidPhoneError
-from model import validation
+from src.exceptions.contact import InvalidPhoneNumberError
+from src.model import validation
 
 
 class Contact:
@@ -22,7 +22,7 @@ class Contact:
     @phone.setter
     def phone(self, value: str):
         if not validation.is_phone_number(value):
-            raise InvalidPhoneError(value)
+            raise InvalidPhoneNumberError(value)
         self._phone = value
 
     def __str__(self):
