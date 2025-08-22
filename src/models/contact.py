@@ -1,6 +1,6 @@
 import re
 
-from src.exceptions.contact import InvalidPhoneNumberError
+from src.exceptions.contact import InvalidPhoneNumberError, InvalidContactNameError
 
 
 class Contact:
@@ -16,6 +16,16 @@ class Contact:
             self.phone,
             self.comment
         ]
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @name.setter
+    def name(self, value: str):
+        if not value:
+            raise InvalidContactNameError(value)
+        self._name = value
 
     @property
     def phone(self) -> str:

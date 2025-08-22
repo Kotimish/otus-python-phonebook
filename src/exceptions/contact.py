@@ -11,3 +11,10 @@ class InvalidPhoneNumberError(ContactException):
         self.phone = phone
         self.message = message.format(phone=self.phone)
         super().__init__(self.message)
+
+
+class InvalidContactNameError(ContactException):
+    def __init__(self, name, message=text.incorrect_contact_name_error):
+        self.name = name
+        self.message = message.format(name=self.name)
+        super().__init__(self.message)

@@ -1,6 +1,7 @@
 import src.exceptions.contact
 import src.exceptions.phonebook
 from src import text
+from src.exceptions.base_exception import BasePhonebookException
 from src.interfaces.view import AbstractView
 from src.models.contact import Contact
 from src.models.phonebook import PhoneBook
@@ -21,9 +22,7 @@ class MainController:
             return
         try:
             self.phonebook.load_contacts()
-        except FileNotFoundError as e:
-            self.view.show_message(text.error.format(error=e))
-        except src.exceptions.phonebook.InvalidJSONError as e:
+        except BasePhonebookException as e:
             self.view.show_message(text.error.format(error=e))
         else:
             self.view.show_message(text.phonebook_load_successful)
@@ -51,7 +50,7 @@ class MainController:
         ])
         try:
             self.phonebook.create_contact(name, phone, comment)
-        except src.exceptions.contact.InvalidPhoneNumberError as e:
+        except BasePhonebookException as e:
             self.view.show_message(text.error.format(error=e))
         else:
             self.view.show_message(text.contact_created_successful.format(name=name))
@@ -69,9 +68,7 @@ class MainController:
         }
         try:
             edited_contact = self.phonebook.edit_contact(contact_id, new_data)
-        except src.exceptions.phonebook.InvalidContactIDError as e:
-            self.view.show_message(text.error.format(error=e))
-        except src.exceptions.phonebook.ContactNotFoundError as e:
+        except BasePhonebookException as e:
             self.view.show_message(text.error.format(error=e))
         else:
             self.view.show_message(text.contact_edited_successful.format(name=edited_contact.name))
@@ -87,9 +84,7 @@ class MainController:
             return
         try:
             contact = self.phonebook.delete_contact(contact_id)
-        except src.exceptions.phonebook.InvalidContactIDError as e:
-            self.view.show_message(text.error.format(error=e))
-        except src.exceptions.phonebook.ContactNotFoundError as e:
+        except BasePhonebookException as e:
             self.view.show_message(text.error.format(error=e))
         else:
             self.view.show_message(text.contact_deleted_successful.format(name=contact.name))
