@@ -1,11 +1,11 @@
 from src.exceptions.phonebook import InvalidContactIDError, ContactNotFoundError
-from src.interfaces.repository import IRepository
+from src.interfaces.repository import AbstractRepository
 from src.models.contact import Contact
 
 
 class PhoneBook:
     """Класс для работы с телефонным справочником"""
-    def __init__(self, repository: IRepository):
+    def __init__(self, repository: AbstractRepository):
         self.repository = repository
         self.contacts: dict[int, Contact] = {}
 

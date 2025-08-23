@@ -1,10 +1,10 @@
 import json
 
-from src.interfaces.repository import IRepository
+from src.interfaces.repository import AbstractRepository
 import src.exceptions.repository as exceptions
 
 
-class JsonRepository(IRepository):
+class JsonRepository(AbstractRepository):
     """Класс для работы с файлами (загрузка/сохранение)."""
     def __init__(self, file_path: str):
         self.file_path = file_path

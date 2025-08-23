@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class IRepository(ABC):
+class AbstractRepository(ABC):
     @abstractmethod
     def load(self) -> dict:
         raise NotImplementedError
