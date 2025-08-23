@@ -31,7 +31,8 @@ incorrect_contact_name_error = 'Некорректный формат назва
 incorrect_contact_id_error = 'Некорректный ID номера телефона: \'{idx}\'.'
 not_found_file_error = 'Файл не найден: {file_path}.'
 not_found_contact_error = 'Контакт с ID \'{idx}\' не найден.'
-incorrect_file_data_error = 'Некорректный формат данных в файле: {file_path}'
+incorrect_loading_file_data_error = 'Некорректный формат данных в файле: {file_path}'
+incorrect_saving_file_data_error = 'Некорректный формат данных для записи: {data}'
 incorrect_input_close_answer_error = 'Ошибка: введите \'y\' или \'n\''
 
 

@@ -32,7 +32,7 @@ def test_load_phonebook_with_invalid_file_type():
     file_path = Path(__file__).parent / 'data' / 'test_phonebook_data.csv'
     repository = JsonRepository(str(file_path))
     phonebook = PhoneBook(repository)
-    with pytest.raises(exceptions.IncorrectRepositoryDataError) as e:
+    with pytest.raises(exceptions.LoadingRepositoryDataError) as e:
         phonebook.load_contacts()
 
 
@@ -57,3 +57,22 @@ def test_save_valid_phonebook(tmp_path):
     assert len(phonebook.contacts) == 1
     for idx, contact in phonebook.contacts.items():
         assert test_contact == contact
+
+
+def test_save_phonebook_with_missing_file(tmp_path):
+    """Тест некорректного сохранения справочника"""
+    file_path = tmp_path / 'test_phonebook_data.json'
+    repository = JsonRepository(str(file_path))
+    phonebook = PhoneBook(repository)
+    phonebook.repository.file_path = tmp_path / 'missing_dir' / 'test_phonebook_data.json'
+    with pytest.raises(exceptions.RepositoryPathError) as e:
+        phonebook.save_contacts()
+
+
+def test_save_phonebook_with_invalid_data(tmp_path):
+    """Тест сохранения справочника с некорректными данными"""
+    data = {1, 2, 3}
+    file_path = tmp_path / 'test_phonebook_data.json'
+    repository = JsonRepository(str(file_path))
+    with pytest.raises(exceptions.SavingRepositoryDataError) as e:
+        repository.save(data)
