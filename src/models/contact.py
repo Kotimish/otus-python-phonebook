@@ -1,11 +1,12 @@
 import re
 
-from src.exceptions.contact import InvalidPhoneNumberError, InvalidContactNameError
+import src.exceptions.contact as exceptions
 
 
 class Contact:
     """Класс для работы с контактами"""
     def __init__(self, name: str, phone: str, comment: str=''):
+        self._name = ''
         self.name = name
         self._phone = ''
         self.phone = phone
@@ -23,8 +24,8 @@ class Contact:
 
     @name.setter
     def name(self, value: str):
-        if not value:
-            raise InvalidContactNameError(value)
+        if not value or not isinstance(value, str):
+            raise exceptions.InvalidContactNameError(value)
         self._name = value
 
     @property
@@ -33,8 +34,10 @@ class Contact:
 
     @phone.setter
     def phone(self, value: str):
+        if isinstance(value, int):
+            value = str(value)
         if not self._is_phone_number(value):
-            raise InvalidPhoneNumberError(value)
+            raise exceptions.InvalidPhoneNumberError(value)
         self._phone = value
 
     def __str__(self):
@@ -45,6 +48,15 @@ class Contact:
         if self.comment:
             text += f', Коммент: {self.comment};'
         return text
+
+    def __eq__(self, other):
+        if not isinstance(other, Contact):
+            raise exceptions.ContactException
+        return (
+            self.name == other.name and
+            self.phone == other.phone and
+            self.comment == other.comment
+        )
 
     def contains(self, word: str) -> bool:
         """
@@ -95,12 +107,11 @@ class Contact:
         # Скобки, пробельные символы, дефисы и тире
         pattern = r'[\(\)\s\u002D\u2010\u2011\u2012\u2013\u2014\u2212]+'
         # Отсутствует номер
-        if not number:
+        if not number or not isinstance(number, str):
             return False
-        # Пропущен указатель на международный код страны
-        if len(number) > 0 and number[0] != '+':
-            return False
-        number = number[1:]
+        # Проверка на международный код страны
+        if number.startswith('+'):
+            number = number[1:]
         number = re.sub(pattern, '', number)
         # В номере присутствуют недопустимые символы
         if not number.isdigit():

@@ -1,6 +1,7 @@
 import json
 
 from src.interfaces.repository import IRepository
+import src.exceptions.repository as exceptions
 
 
 class JsonRepository(IRepository):
@@ -12,8 +13,13 @@ class JsonRepository(IRepository):
         """
         Загрузка json-файла
         """
-        with open(self.file_path, 'r', encoding='UTF-8') as file:
-            data = json.load(file)
+        try:
+            with open(self.file_path, 'r', encoding='UTF-8') as file:
+                data = json.load(file)
+        except FileNotFoundError as e:
+            raise exceptions.RepositoryPathError(file_path=self.file_path)
+        except json.JSONDecodeError as e:
+            raise exceptions.IncorrectRepositoryDataError(file_path=self.file_path)
         return data
 
     def save(self, data: dict):

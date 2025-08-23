@@ -9,7 +9,7 @@ class PhoneBook:
         self.repository = repository
         self.contacts: dict[int, Contact] = {}
 
-    def create_contact(self, name: str, phone: str, comment: str) -> int:
+    def create_contact(self, name: str, phone: str, comment: str = '') -> int:
         """
         Создает контакт на основе введенных данных
         :param name: Название контакта
@@ -27,10 +27,7 @@ class PhoneBook:
         :param contact_id: ID искомого контакта
         :return: Контакт
         """
-        if not isinstance(contact_id, int) or contact_id <= 0:
-            raise InvalidContactIDError(contact_id)
-        if contact_id not in self.contacts:
-            raise ContactNotFoundError(contact_id)
+        self._check_contact_id(contact_id)
         return self.contacts.get(contact_id)
 
     def _next_id(self) -> int:
@@ -74,12 +71,16 @@ class PhoneBook:
         :param contact_id: ID удаляемого контакта
         :return: Словарь с данными об удаленном контакте
         """
+        self._check_contact_id(contact_id)
+        contact = self.contacts.pop(contact_id)
+        return contact
+
+    def _check_contact_id(self, contact_id: int):
+        """Проверка корректности id контакта"""
         if not isinstance(contact_id, int) or contact_id <= 0:
             raise InvalidContactIDError(contact_id)
         if contact_id not in self.contacts:
             raise ContactNotFoundError(contact_id)
-        contact = self.contacts.pop(contact_id)
-        return contact
 
     def load_contacts(self):
         """
