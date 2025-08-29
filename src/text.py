@@ -26,11 +26,13 @@ maximum_number_attempts_error = 'Превышено число попыток в
 # --- Сообщения об ошибках ---
 error = 'Ошибка: {error}'
 decode_error = 'Ошибка кодировки. Пожалуйста, введите текст корректно'
-incorrect_phone_error = 'Некорректный формат номера телефона \'{phone}\'.'
-incorrect_contact_id_error = 'Некорректный формат номера телефона \'{idx}\'.'
+incorrect_phone_error = 'Некорректный формат номера телефона: \'{phone}\'.'
+incorrect_contact_name_error = 'Некорректный формат названия контакта: \'{name}\'.'
+incorrect_contact_id_error = 'Некорректный ID номера телефона: \'{idx}\'.'
 not_found_file_error = 'Файл не найден: {file_path}.'
 not_found_contact_error = 'Контакт с ID \'{idx}\' не найден.'
-incorrect_json_file_error = 'Некорректный формат JSON в файле: {file_path}'
+incorrect_loading_file_data_error = 'Некорректный формат данных в файле: {file_path}'
+incorrect_saving_file_data_error = 'Некорректный формат данных для записи: {data}'
 incorrect_input_close_answer_error = 'Ошибка: введите \'y\' или \'n\''
 
 

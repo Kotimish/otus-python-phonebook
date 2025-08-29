@@ -1,40 +1,33 @@
-import json
-
-from error import InvalidContactIDError, ContactNotFoundError
-from model.contact import Contact
-from model.file_handler import FileHandler
+from src.exceptions.phonebook import InvalidContactIDError, ContactNotFoundError
+from src.interfaces.repository import AbstractRepository
+from src.models.contact import Contact
 
 
 class PhoneBook:
     """Класс для работы с телефонным справочником"""
-    def __init__(self, path):
-        self.path = path
-        self.contacts = {}
+    def __init__(self, repository: AbstractRepository):
+        self.repository = repository
+        self.contacts: dict[int, Contact] = {}
 
-    def create_contact(self, contact: list) -> int:
+    def create_contact(self, name: str, phone: str, comment: str = '') -> int:
         """
         Создает контакт на основе введенных данных
-        :param contact: Данные нового контакта
+        :param name: Название контакта
+        :param phone: Номер телефона
+        :param comment: Комментарий (опционально)
         :return: ID нового контакта
         """
         next_id = self._next_id()
-        self.contacts[next_id] = Contact(
-            contact[0],
-            contact[1],
-            contact[2]
-        )
+        self.contacts[next_id] = Contact(name, phone, comment)
         return next_id
 
-    def get_contact(self, contact_id: int) -> dict:
+    def get_contact(self, contact_id: int) -> Contact:
         """
         Получение контакта из Телефонного справочника
         :param contact_id: ID искомого контакта
         :return: Контакт
         """
-        if not isinstance(contact_id, int) or contact_id <= 0:
-            raise InvalidContactIDError(contact_id)
-        if contact_id not in self.contacts:
-            raise ContactNotFoundError(contact_id)
+        self._check_contact_id(contact_id)
         return self.contacts.get(contact_id)
 
     def _next_id(self) -> int:
@@ -56,7 +49,7 @@ class PhoneBook:
                 result_pb[idx] = contact
         return result_pb
 
-    def edit_contact(self, contact_id: int, edited_contact: dict[str, str]) -> dict:
+    def edit_contact(self, contact_id: int, edited_contact: dict[str, str]) -> Contact:
         """
         Изменить контакт
         :param contact_id: ID изменяемого контакта
@@ -78,28 +71,32 @@ class PhoneBook:
         :param contact_id: ID удаляемого контакта
         :return: Словарь с данными об удаленном контакте
         """
+        self._check_contact_id(contact_id)
+        contact = self.contacts.pop(contact_id)
+        return contact
+
+    def _check_contact_id(self, contact_id: int):
+        """Проверка корректности id контакта"""
         if not isinstance(contact_id, int) or contact_id <= 0:
             raise InvalidContactIDError(contact_id)
         if contact_id not in self.contacts:
             raise ContactNotFoundError(contact_id)
-        contact = self.contacts.pop(contact_id)
-        return contact
 
-    def load_json(self):
+    def load_contacts(self):
         """
         Загрузка json-файла
         """
-        data = FileHandler.load_json(self.path)
+        data = self.repository.load()
         self.contacts = {
             idx: Contact.deserialize(contact)
             for idx, contact in enumerate(data.get('phonebook', []), 1)
         }
 
-    def save_json(self):
+    def save_contacts(self):
         """
         Сохранение json-файла
         """
         data = {'phonebook': []}
         for contact in self.contacts.values():
             data['phonebook'].append(contact.serialize())
-        FileHandler.save_json(self.path, data)
+        self.repository.save(data)
